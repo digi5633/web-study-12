@@ -17,27 +17,21 @@ public class BoardWriteModel implements Command {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getMethod().equalsIgnoreCase("GET")) {
-			System.out.println("GET");
 
-		} else {
-			System.out.println("POST");
+		/*	Board board = new Board();
+			board.setPass(request.getParameter("PASS"));
+			board.setName(request.getParameter("NAME"));
+			board.setEmail(request.getParameter("EMAIL"));
+			board.setTitle(request.getParameter("TITLE"));
+			board.setContent(request.getParameter("CONTENT"));
+		
+			int res = service.addBoard(board);
+			System.out.println(board);
+		
+			response.getWriter().print(res);*/
 
-				Board board = new Board();
-				board.setPass(request.getParameter("PASS"));
-				board.setName(request.getParameter("NAME"));
-				board.setEmail(request.getParameter("EMAIL"));
-				board.setTitle(request.getParameter("TITLE"));
-				board.setContent(request.getParameter("CONTENT"));
+		return "/board/boardWrite.jsp";
 
-				int res = service.addBoard(board);
-				System.out.println(board);
-
-				response.getWriter().print(res);
-	
-		}
-		return "boardList.do";
-	
 	}
 
 }
