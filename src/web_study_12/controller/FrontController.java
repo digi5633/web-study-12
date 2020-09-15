@@ -72,7 +72,7 @@ public class FrontController extends HttpServlet {
 		}
 
 		Command commandHandler = handlerMap.get(command);
-		System.out.println(commandHandler);
+		System.out.println("commandHandler > " + commandHandler);
 
 		String viewPage = commandHandler.process(request, response);
 		System.out.println("viewPage > " + viewPage);

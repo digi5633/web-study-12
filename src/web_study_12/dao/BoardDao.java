@@ -10,14 +10,14 @@ public interface BoardDao {
 
 	int insertBoard(Board board);
 
-	void updateReadCount(String num);
+	void updateReadCount(int num);
 	
-	Board selectBoardByNum(String num);
+	Board selectBoardByNum(int num);
 	
 	int updateBoard(Board board);
 	
-	Board checkPassword(String pass, String num);
+	Board checkPassword(String pass, int num);
 	
-	int deleteBoard(String num);
+	int deleteBoard(int num);
 
 }

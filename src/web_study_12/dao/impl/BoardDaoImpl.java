@@ -75,10 +75,10 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public void updateReadCount(String num) {
+	public void updateReadCount(int num) {
 		String sql = "UPDATE BOARD SET READCOUNT = READCOUNT +1 WHERE NUM = ?";
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setString(1, num);
+			pstmt.setInt(1, num);
 			return;
 		} catch (SQLException e) {
 			throw new CustomSQLException(e);
@@ -87,10 +87,10 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public Board selectBoardByNum(String num) {
+	public Board selectBoardByNum(int num) {
 		String sql = "SELECT * FROM BOARD WHERE NUM = ?";
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setString(1, num);
+			pstmt.setInt(1, num);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				if (rs.next()) {
 					return getBoard(rs);
@@ -120,11 +120,16 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public Board checkPassword(String pass, String num) {
-		String sql = "SELECT * FROM BOARD WHERE PASS = ? AND NUM = ?";
+	public Board checkPassword(String pass, int num) {
+		String sql = "SELECT NUM, PASS, NAME, EMAIL, TITLE, CONTENT, READCOUNT, WRITEDATE FROM BOARD WHERE PASS = ? AND NUM = ?";
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setString(1, pass);
-			pstmt.setString(2, num);
+			pstmt.setInt(2, num);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return getBoard(rs);
+				}
+			}
 		} catch (SQLException e) {
 			throw new CustomSQLException(e);
 		}
@@ -132,10 +137,10 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int deleteBoard(String num) {
+	public int deleteBoard(int num) {
 		String sql = "DELETE FROM BOARD WHERE NUM = ?";
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
-			pstmt.setString(1, num);
+			pstmt.setInt(1, num);
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new CustomSQLException(e);

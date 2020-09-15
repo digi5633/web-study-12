@@ -7,17 +7,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web_study_12.controller.Command;
+import web_study_12.dto.Board;
 import web_study_12.service.BoardService;
 
 public class BoardCheckPassModel implements Command {
-	
+
 	private BoardService service = new BoardService();
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		if (request.getMethod().equalsIgnoreCase("GET")) {
+			System.out.println("GET");
+
+			String url = null;
+
+			int boardNum = Integer.parseInt(request.getParameter("num").trim());
+			String boardPass = request.getParameter("pass").trim();
+			System.out.println("boardNum > " + boardNum + ", boardPass > " + boardPass);
+			Board checkPass = service.checkPassword(boardPass, boardNum);
+			System.out.println("checkPass > " + checkPass);
+
+			if (checkPass == null) {	// 실패
+				url = "board/boardCheckPass.jsp";
+				request.setAttribute("message", "비밀번호가 틀렸습니다.");
+			} else  {	// 성공
+				url = "board/checkSuccess.jsp";
+			}
+			return url;
+
+		} else {
+			System.out.println("POST");
+		}
 		return null;
+		
 	}
 
 }

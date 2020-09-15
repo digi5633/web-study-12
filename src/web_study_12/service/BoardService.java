@@ -23,11 +23,11 @@ public class BoardService {
 		return dao.selectBoardByAll();
 	}
 	
-	public int addBoard(Board board) {
+	public int insertBoard(Board board) {
 		return dao.insertBoard(board);
 	}
 	
-	public int removeBoard(String board) {
+	public int removeBoard(int board) {
 		return dao.deleteBoard(board);
 	}
 
@@ -35,11 +35,11 @@ public class BoardService {
 		return dao.updateBoard(board);
 	}
 	
-	public Board getBoardNum(String board) {
+	public Board getBoardNum(int board) {
 		return dao.selectBoardByNum(board);
 	}
 	
-	public Board checkPass(String pass, String num) {
+	public Board checkPassword(String pass, int num) {
 		return dao.checkPassword(pass, num);
 	}
 

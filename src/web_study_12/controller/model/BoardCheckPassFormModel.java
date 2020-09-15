@@ -7,12 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import web_study_12.controller.Command;
-import web_study_12.dto.Board;
-import web_study_12.service.BoardService;
 
-public class BoardDeleteModel implements Command {
-	
-	private BoardService service = new BoardService();
+public class BoardCheckPassFormModel implements Command {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
@@ -20,14 +16,8 @@ public class BoardDeleteModel implements Command {
 
 		if (request.getMethod().equalsIgnoreCase("GET")) {
 			System.out.println("GET");
-			
-			int boardNum = Integer.parseInt(request.getParameter("num").trim());
-			System.out.println("boardNum > " + boardNum);
-			
-			int removeBoard = service.removeBoard(boardNum);
-			System.out.println("removeBoard > " + removeBoard);
-			
-			return "boardList.do";
+
+			return "board/boardCheckPass.jsp";
 
 		} else {
 			System.out.println("POST");

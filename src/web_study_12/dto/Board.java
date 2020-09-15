@@ -17,6 +17,12 @@ public class Board {
 
 	}
 
+	public Board(int num, String pass) {
+		super();
+		this.num = num;
+		this.pass = pass;
+	}
+
 	public Board(int num, String pass, String name, String email, String title, String content, int readcount,
 			Timestamp writedate) {
 		super();

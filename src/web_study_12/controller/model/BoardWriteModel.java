@@ -1,10 +1,13 @@
 package web_study_12.controller.model;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import web_study_12.controller.Command;
 import web_study_12.dto.Board;
@@ -18,19 +21,24 @@ public class BoardWriteModel implements Command {
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*	Board board = new Board();
-			board.setPass(request.getParameter("PASS"));
-			board.setName(request.getParameter("NAME"));
-			board.setEmail(request.getParameter("EMAIL"));
-			board.setTitle(request.getParameter("TITLE"));
-			board.setContent(request.getParameter("CONTENT"));
-		
-			int res = service.addBoard(board);
-			System.out.println(board);
-		
-			response.getWriter().print(res);*/
+		if (request.getMethod().equalsIgnoreCase("GET")) {
+			System.out.println("GET");
 
-		return "/board/boardWrite.jsp";
+			return "board/boardWrite.jsp";
+
+		} else {
+			System.out.println("POST");
+
+			Gson gson = new Gson();
+			Board addBoard = gson.fromJson(new InputStreamReader(request.getInputStream(), "UTF-8"), Board.class);
+			System.out.println(addBoard);
+
+			int res = service.insertBoard(addBoard);
+			response.getWriter().print(res);
+
+			return null;
+
+		}
 
 	}
 

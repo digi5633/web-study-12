@@ -13,5 +13,6 @@
 		<c:set var="con" value="${JndiDS.getConnection()}"/>
 		<c:out value="${con}"/>
 		<br><br>
+		<a href="boardList.do">게시판으로 이동</a>
 	</body>
 </html>
