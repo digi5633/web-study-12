@@ -79,7 +79,7 @@ public class BoardDaoImpl implements BoardDao {
 		String sql = "UPDATE BOARD SET READCOUNT = READCOUNT +1 WHERE NUM = ?";
 		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
 			pstmt.setInt(1, num);
-			return;
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			throw new CustomSQLException(e);
 		}
