@@ -29,6 +29,17 @@ public class BoardCheckPassModel implements Command {
 			Board checkPass = service.checkPassword(boardPass, boardNum);
 			System.out.println("checkPass > " + checkPass);
 
+			Board getNum = service.getBoardNum(boardNum);
+			
+			if (getNum.getPass().equals(boardPass)) { // 성공
+				url = "board/checkSuccess.jsp";
+			} else { // 실패
+				url = "board/boardCheckPass.jsp";
+				request.setAttribute("message", "비밀번호가 틀렸습니다.");
+			}
+			return url;
+
+			/*
 			if (checkPass == null) {	// 실패
 				url = "board/boardCheckPass.jsp";
 				request.setAttribute("message", "비밀번호가 틀렸습니다.");
@@ -36,12 +47,13 @@ public class BoardCheckPassModel implements Command {
 				url = "board/checkSuccess.jsp";
 			}
 			return url;
+			*/
 
 		} else {
 			System.out.println("POST");
 		}
 		return null;
-		
+
 	}
 
 }

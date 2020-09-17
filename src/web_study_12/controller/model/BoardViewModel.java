@@ -24,16 +24,17 @@ public class BoardViewModel implements Command {
 			int boardNum = Integer.parseInt(request.getParameter("num").trim());
 			System.out.println("boardNum > " + boardNum);
 
-			Board getBoard = service.getBoardNum(boardNum);
-			System.out.println("getBoard > " + getBoard);
-			
 			service.updateReadCount(boardNum);
 			
+			Board getBoard = service.getBoardNum(boardNum);
+			System.out.println("getBoard > " + getBoard);
+
 			request.setAttribute("getBoard", getBoard);
 			return "board/boardView.jsp";
-			
+
 		} else {
 			System.out.println("POST");
+
 		}
 		return null;
 	}
